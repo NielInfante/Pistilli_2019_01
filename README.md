@@ -18,7 +18,7 @@ This makes QC reports for each file. To get a single report, cd to the fastqc fo
 multiqc -o multiqc .
 ```
 
-Quality looks good. There are two files called "test" that are different, I will exclude them from further analysis.
+Quality looks good. There are two files called "test" that are different. (They are Ryan testing something else, and can safely be ignored.) I will exclude them from further analysis.
 
 
 ### Quantification
