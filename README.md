@@ -23,10 +23,10 @@ Quality looks good. There are two files called "test" that are different. (They 
 
 ### Quantification
 
-Gat the reference from Ensembl, release 94. Got cDNA_all and ncRNA, cat them together and build salmon index.
+Get the reference from Ensembl, release 94. Got cDNA_all and ncRNA, cat them together and build salmon index.
 
 ```
-conda activate
+conda activate salmon
 
 # Build index
 salmon index -t CDNA_and_NCrna.fa -i hg38.94 --type quasi -k 31
@@ -34,11 +34,19 @@ salmon index -t CDNA_and_NCrna.fa -i hg38.94 --type quasi -k 31
 # Do quantification
 for f in P*R1*; do echo $f; salmon quant -i ../Data/hg38.94 --libType A --gcBias -p 20 --numBootstraps 50 -o ../salmon/${f%_S*} -1 $f -2 ${f/R1/R2}; done
 
+salmon version
+# salmon v0.11.0
+
 conda deativate
 ```
 
 
 In the reads folder, use salmon to quantify each read
+
+Adding in previously sequenced samples. Redoing quantification, to make sure everything is done equally. From Apr 2017 folder, run salmon again, writting to the current salmon directory.
+
+
+
 
 ### Differential expression
 
