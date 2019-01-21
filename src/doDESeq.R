@@ -19,46 +19,46 @@ orgDB <- org.Hs.eg.db
 
 # Input and Output
 
-directory<-"~/depot/projects/Ma/July_2018/"
-outDir <- "~/depot/projects/Ma/July_2018/deseq"
-outPrefix <- 'Group_Early_Late'
+directory<-"~/depot/projects/Pistilli/Pistilli_2019_01/"
+outDir <- "~/depot/projects/Pistilli/Pistilli_2019_01/deseq"
+outPrefix <- 'All'
 
 setwd(directory)
 
 # The Stats
 
-PCA_Group <- 'Group'
-design =~ Group 
-contrast <- c('Group','Early','Late')
+PCA_Group <- 'Cancer'
+design =~ Cancer 
+contrast <- c('Cancer','Cancer','Control')
 
 
 
 
-tx2gene <- read.table('hg38/IDs', header=T, sep="\t", stringsAsFactors = F)
+tx2gene <- read.table('Data/hg38_IDs', header=T, sep="\t", stringsAsFactors = F)
 
 metadata <- read.table('meta', header = T, sep="\t", stringsAsFactors = T)
 
-meta <- metadata %>% dplyr::filter(Group %in% c('Late', 'Early'))
+meta <- metadata 
 
 
 
+#timePoint <- c('0','120d','14d','30d','3d','3h','60d','6d','8h','9d','wo')
+#for(idx1 in 1:10){
+#	for (idx2 in (idx1+1):11){
+#		G1 <- timePoint[idx1]
+#		G2 <- timePoint[idx2]
+#		print(paste("G1 is",G1,"and G2 is ",G2))
+#		meta <- metadata %>% filter(Time %in% c(G1,G2))
+		
+#		contrast <- c('Time',G1,G2)
+#		outPrefix <- paste0("Time_",G1,"_",G2)
+		
+		
+#		doItAll()		
+		
+#	}
+#}
 
-timePoint <- c('0','120d','14d','30d','3d','3h','60d','6d','8h','9d','wo')
-for(idx1 in 1:10){
-	for (idx2 in (idx1+1):11){
-		G1 <- timePoint[idx1]
-		G2 <- timePoint[idx2]
-		print(paste("G1 is",G1,"and G2 is ",G2))
-		meta <- metadata %>% filter(Time %in% c(G1,G2))
-		
-		contrast <- c('Time',G1,G2)
-		outPrefix <- paste0("Time_",G1,"_",G2)
-		
-		
-		doItAll()		
-		
-	}
-}
 
 
 
@@ -71,8 +71,8 @@ doItAll <- function(){
 
 #meta <- metadata %>% filter(Time == '0' | Time =='120d')
 #meta <- metadata
-meta$ID <- meta$Sample
-samples <- meta$ID
+meta$ID <- meta$SampleID
+samples <- meta$Filename
 
 files <- paste0(directory, 'salmon/', samples, '/quant.sf')
 
@@ -92,6 +92,10 @@ dds <- dds[keep,] # filter them out
 
 
 dds <- DESeq(dds)
+
+# Save dds
+saveRDS(dds, paste0(outDir, '/', outPrefix, '_dds.rds'))
+
 
 res<-results(dds, contrast=contrast)
 res<-res[order(res$padj),]
@@ -120,14 +124,14 @@ res$Gene[idx] <- res$ID[idx]
 
 
 # Write Results
-outResults <- data.frame(GeneID=res$ID, Gene=res$Gene, baseMean=res$baseMean, log2FoldChange=res$log2FoldChange, pvalue=res$pvalue, padj=res$padj)
+outResults <- data.frame(GeneID=res$ID, Gene=res$Gene, baseMean=res$baseMean, stat=res$stat, log2FoldChange=res$log2FoldChange, pvalue=res$pvalue, padj=res$padj)
 name <- paste(outDir, '/', outPrefix, '_results.txt', sep="") 
 write.table(outResults, file=name, sep="\t", quote=F, row.names=F)
 
 # Significant genes
 r2 <- res[!(is.na(res$padj)),]
 resSig <- r2[ r2$padj < 0.05, ]
-resTable <- data.frame(GeneID=row.names(resSig), Gene=resSig$Gene, baseMean=resSig$baseMean, log2FoldChange=resSig$log2FoldChange, pvalue=resSig$pvalue, padj=resSig$padj)
+resTable <- data.frame(GeneID=row.names(resSig), Gene=resSig$Gene, baseMean=resSig$baseMean, stat=resSig$stat, log2FoldChange=resSig$log2FoldChange, pvalue=resSig$pvalue, padj=resSig$padj)
 write.table(resTable,file=paste(outDir, "/", outPrefix, "_significant.txt", sep=""), sep="\t", quote=F, row.names=F)
 
 
@@ -143,13 +147,6 @@ dev.off()
 name <- paste(outDir, '/', outPrefix, '_MAplot.png', sep="") 
 png(name)
 plotMA(dds)
-dev.off()
-
-name <- paste(outDir, '/', outPrefix, '_MA_20.png', sep="") 
-png(name)
-res[1:20,] %>% ggplot(aes(x=baseMean,y=log2FoldChange)) + geom_point() + 
-			geom_text_repel(aes(label=Genus)) + 
-			scale_x_log10() + geom_hline(yintercept=0, color='black') +  theme_bw()
 dev.off()
 
 
@@ -172,7 +169,7 @@ dev.off()
 
 name <- paste(outDir, '/', outPrefix, '_cluster.png', sep="") 
 png(name)
-plot(hclust(dist(t(assay(vsd)))), label=with(colData(dds), paste(Time,ID, sep=" : ")), main='Dendrogram', xlab='', sub='')
+plot(hclust(dist(t(assay(vsd)))), label=with(colData(dds), paste(SampleID,Cancer, sep=" : ")), main='Dendrogram', xlab='', sub='')
 dev.off()
 
 
@@ -189,18 +186,24 @@ dev.off()
 name <- paste(outDir, '/', outPrefix, '_PCA_names.png', sep="") 
 png(name)
 p <- plotPCA(vsd, intgroup=c(PCA_Group))
-p <- p + geom_text_repel(aes_string(x="PC1", y="PC2", label=colData(dds)$ID), point.padding = unit(2,"points"))
+p <- p + geom_text_repel(aes_string(x="PC1", y="PC2", label=colData(dds)$SampleID), point.padding = unit(2,"points"))
 print(p)
 dev.off()
 
 
 
 pcaData <- plotPCA(vsd, intgroup=PCA_Group, returnData=TRUE)
-pcaData$f <- colData(dds)$File
-pcaData$Location <- colData(dds)$Location
-pcaData$BMI <- colData(dds)$BMI
-pcaData$Name <- colData(dds)$PS
-pcaData$Patient <- colData(dds)$Patient
+pcaData$SampleID <- colData(dds)$SampleID
+
+pcaData$group <- NULL
+pcaData$Cancer <- NULL
+pcaData$name <- NULL
+
+
+#pcaData$Location <- colData(dds)$Location
+#pcaData$BMI <- colData(dds)$BMI
+#pcaData$Name <- colData(dds)$PS
+#pcaData$Patient <- colData(dds)$Patient
 
 percentVar <- round(100 * attr(pcaData, "percentVar"))
 
