@@ -52,6 +52,7 @@ Adding in previously sequenced samples. Redoing quantification, to make sure eve
 
 Use the R script doDESeq.R to find differentially expressed genes, and produce some figures
 
+<<<<<<< HEAD
 The set up for different prefixes:
 
 ##### All
@@ -110,6 +111,8 @@ make_emperor.py -i pca.dat -m meta.dat
 conda deactivate
 ```
 
+=======
+>>>>>>> 2fa6b21439b8173f68a9a7bd1dcfa752967ab92b
 ### GO Analysis
 
 ### Pathway Analysis

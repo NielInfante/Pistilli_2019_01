@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 library(DESeq2)
 dds <- readRDS(file='~/depot/projects/Pistilli/Pistilli_2019_01/deseq/All_dds.rds')
 
@@ -7,6 +8,8 @@ res <- as.data.frame(res)
 
 
 
+=======
+>>>>>>> 2fa6b21439b8173f68a9a7bd1dcfa752967ab92b
 
 # Get most expressed genes
 topExp <- res[order(res$baseMean, decreasing=T)[1:500],]$ID
