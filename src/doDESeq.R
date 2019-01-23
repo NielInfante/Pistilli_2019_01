@@ -27,9 +27,10 @@ setwd(directory)
 
 # The Stats
 
-PCA_Group <- 'Cancer'
-design =~ Cancer 
-contrast <- c('Cancer','Cancer','Control')
+outPrefix <- 'TP'
+PCA_Group <- 'Group'
+design =~ Run + Surgeon + Group 
+contrast <- c('Group','TP','Control')
 
 
 
@@ -38,8 +39,15 @@ tx2gene <- read.table('Data/hg38_IDs', header=T, sep="\t", stringsAsFactors = F)
 
 metadata <- read.table('meta', header = T, sep="\t", stringsAsFactors = T)
 
-meta <- metadata 
+outPrefix <- 'TP'
+PCA_Group <- 'Group'
+design =~ Run + Surgeon + Group 
+contrast <- c('Group','TP','Control')
 
+
+
+
+doItAll()
 
 
 #timePoint <- c('0','120d','14d','30d','3d','3h','60d','6d','8h','9d','wo')
@@ -157,7 +165,7 @@ hmcol <- colorRampPalette(brewer.pal(9, "GnBu"))(100)
 
 distsRL <- dist(t(assay(vsd)))
 mat <- as.matrix(distsRL)
-rownames(mat) <- colnames(mat) <- with(colData(dds), paste(Time,ID , sep=" : "))
+rownames(mat) <- colnames(mat) <- with(colData(dds), paste(Group,ID , sep=" : "))
 
 name <- paste(outDir, '/', outPrefix, '_heatmap.png', sep="") 
 png(name)
