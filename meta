@@ -1,5 +1,4 @@
 SampleID	Filename	EdName	Group	Surgeon	Run	Cancer	ID
-<<<<<<< HEAD
 P1	P1	JP6	Control	JP	r2	Control	CON-1
 P2	P2	CU1	Control	CU	r2	Control	CON-4
 P3	P3	CU2	Control	CU	r2	Control	CON-5
@@ -45,50 +44,3 @@ P321	Pistilli-21-BC-HH7	BC-HH7	ERPR	HH	r3	Cancer	BC-31
 P322	Pistilli-22-BC-HH22	BC-HH22	TN	HH	r3	Cancer	BC-32
 P323	Pistilli-23-BC-HH35	BC-HH35	TP	HH	r3	Cancer	BC-33
 P324	Pistilli-24-BC-KL2	BC-KL2	TP	KL	r3	Cancer	BC-34
-=======
-P1	P1	JP6	Control	JP	2	Control	CON-1
-P2	P2	CU1	Control	CU	2	Control	CON-4
-P3	P3	CU2	Control	CU	2	Control	CON-5
-P4	P4	HH12	TP	HH	2	Cancer	XXX
-P5	P5	JP8	TP	JP	2	Cancer	BC-11
-P6	P6	JP9	TN	JP	2	Cancer	BC-13
-P7	P7	CU3	Control	CU	2	Control	CON-6
-P8	P8	HH8	ERPR	HH	2	Cancer	BC-4
-P9	P9	HH16	TP	HH	2	Cancer	BC-9
-P10	P10	HH17	TN	HH	2	Cancer	BC-12
-P11	P11	JP10	TN	JP	2	Cancer	BC-14
-P12	P12	HH5	ERPR	HH	2	Cancer	BC-5
-P21	HH1	HH1	ERPR	HH	1	Cancer	BC-1
-P22	HH2	HH2	ERPR	HH	1	Cancer	BC-2
-P23	HH4	HH4	ERPR	HH	1	Cancer	BC-3
-P24	HH6R	HH6	TP	HH	1	Cancer	BC-7
-P25	HH10	HH10	TP	HH	1	Cancer	BC-8
-P26	HH14	HH14	ERPR	HH	1	Cancer	BC-6
-P27	JP3	JP3	TP	JP	1	Cancer	BC-10
-P28	HH3	HH3	Control	HH	1	Control	CON-2
-P29	HH13	HH13	Control	HH	1	Control	CON-3
-P301	Pistilli-1-CON-CU4	CON-CU4	Control	CU	3	Control	CON-7
-P302	Pistilli-2-CON-CU5	CON-CU5	Control	CU	3	Control	CON-8
-P303	Pistilli-3-CON-CU6	CON-CU6	Control	CU	3	Control	CON-9
-P304	Pistilli-4-CON-CU7	CON-CU7	Control	CU	3	Control	CON-10
-P305	Pistilli-5-BC-JP1	BC-JP1	ERPR	JP	3	Cancer	BC-15
-P306	Pistilli-6-BC-JP4	BC-JP4	ERPR	JP	3	Cancer	BC-16
-P307	Pistilli-7-BC-JP5	BC-JP5	ERPR	JP	3	Cancer	BC-17
-P308	Pistilli-8-BC-JP2	BC-JP2	TP	JP	3	Cancer	BC-18
-P309	Pistilli-9-BC-JP7	BC-JP7	TP	JP	3	Cancer	BC-19
-P310	Pistilli-10-BC-HH12	BC-HH12	TP	HH	3	Cancer	BC-20
-P311	Pistilli-11-BC-HH18	BC-HH18	TN	HH	3	Cancer	BC-21
-P312	Pistilli-12-BC-HH27	BC-HH27	TN	HH	3	Cancer	BC-22
-P313	Pistilli-13-BC-HH32	BC-HH32	TN	HH	3	Cancer	BC-23
-P314	Pistilli-14-BC-KL1	BC-KL1	TN	KL	3	Cancer	BC-24
-P315	Pistilli-15-BC-HH9	BC-HH9	HER	HH	3	Cancer	BC-25
-P316	Pistilli-16-BC-HH20	BC-HH20	HER	HH	3	Cancer	BC-26
-P317	Pistilli-17-BC-HH21	BC-HH21	HER	HH	3	Cancer	BC-27
-P318	Pistilli-18-BC-HH33	BC-HH33	HER	HH	3	Cancer	BC-28
-P319	Pistilli-19-BC-HH34	BC-HH34	HER	HH	3	Cancer	BC-29
-P320	Pistilli-20-BC-HH30	BC-HH30	TN	HH	3	Cancer	BC-30
-P321	Pistilli-21-BC-HH7	BC-HH7	ERPR	HH	3	Cancer	BC-31
-P322	Pistilli-22-BC-HH22	BC-HH22	TN	HH	3	Cancer	BC-32
-P323	Pistilli-23-BC-HH35	BC-HH35	TP	HH	3	Cancer	BC-33
-P324	Pistilli-24-BC-KL2	BC-KL2	TP	KL	3	Cancer	BC-34
->>>>>>> 2fa6b21439b8173f68a9a7bd1dcfa752967ab92b
