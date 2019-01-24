@@ -6,7 +6,7 @@ This run was for RNA isolated from new muscle biopsies of human breast cancer pa
 
 ## Steps:
 
-### Quality Control
+###  :white_check_mark: Quality Control
 In the reads folder, create a fastqc folder. Then run:
 
 ```
@@ -21,7 +21,7 @@ multiqc -o multiqc .
 Quality looks good. There are two files called "test" that are different. (They are Ryan testing something else, and can safely be ignored.) I will exclude them from further analysis.
 
 
-### Quantification
+### :white_check_mark: Quantification
 
 Get the reference from Ensembl, release 94. Got cDNA_all and ncRNA, cat them together and build salmon index.
 
@@ -48,7 +48,7 @@ Adding in previously sequenced samples. Redoing quantification, to make sure eve
 
 
 
-### Differential expression
+### :large_orange_diamond: <!--:white_check_mark:--> Differential expression
 
 Use the R script doDESeq.R to find differentially expressed genes, and produce some figures
 
@@ -101,7 +101,7 @@ design =~ Run + Surgeon + Group
 contrast <- c('Group','TP','Control')
 ```
 
-### Emperor
+### :white_check_mark: Emperor
 
 Use the R script makeEmperor.R to output PCA and meta data files. Headers for both files need to be manually altered; "pc vector number" as a column header in pca.dat, and a #sampleID to meta.dat. Then use:
 ```
@@ -111,6 +111,6 @@ conda deactivate
 ```
 
 
-### GO Analysis
+### :x: <!--:large_orange_diamond: :white_check_mark:--> GO Analysis
 
-### Pathway Analysis
+### :x: <!--:large_orange_diamond: :white_check_mark:--> Pathway Analysis
