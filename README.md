@@ -124,7 +124,18 @@ contrast <- c('Cancer','Cancer','Control')
 meta <- metadata %>% dplyr::filter(!SampleID %in% c('P4','P310'))
 ```
 
+##### TP_vs_Out
+Both outliers are in group TP. How do they differ from other members of this group?
+```
+outPrefix <- 'TP_vs_Out'
+PCA_Group <- 'Out'
+design =~ Run + Surgeon + Out
+contrast <- c('Out','Good','Outlier')
 
+meta <- metadata %>% dplyr::filter(Group=='TP')
+meta$Out <- 'Good'
+meta <- mutate(meta, Out=ifelse(SampleID %in% c('P4','P310'), 'Outlier','Good'))
+```
 
 
 ### :white_check_mark: Emperor
