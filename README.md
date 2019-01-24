@@ -101,6 +101,32 @@ design =~ Run + Surgeon + Group
 contrast <- c('Group','TP','Control')
 ```
 
+##### TP_fixed
+Remove two outliers
+```
+outPrefix <- 'TP_fixed'
+PCA_Group <- 'Group'
+design =~ Run + Surgeon + Group
+contrast <- c('Group','TP','Control')
+
+meta <- metadata %>% dplyr::filter(Group=='TP' | Group=='Control') %>%
+	dplyr::filter(!SampleID %in% c('P4','P310'))
+
+```
+
+##### All_fixed
+Remove two outliers
+```
+outPrefix <- 'All_fixed'
+PCA_Group <- 'Cancer'
+design =~ Run + Surgeon + Cancer
+contrast <- c('Cancer','Cancer','Control')
+meta <- metadata %>% dplyr::filter(!SampleID %in% c('P4','P310'))
+```
+
+
+
+
 ### :white_check_mark: Emperor
 
 Use the R script makeEmperor.R to output PCA and meta data files. Headers for both files need to be manually altered; "pc vector number" as a column header in pca.dat, and a #sampleID to meta.dat. Then use:
