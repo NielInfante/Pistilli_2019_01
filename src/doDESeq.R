@@ -39,18 +39,29 @@ tx2gene <- read.table('Data/hg38_IDs', header=T, sep="\t", stringsAsFactors = F)
 
 metadata <- read.table('meta', header = T, sep="\t", stringsAsFactors = T)
 
-outPrefix <- 'TP'
-PCA_Group <- 'Group'
-design =~ Run + Surgeon + Group 
-contrast <- c('Group','TP','Control')
+outPrefix <- 'All_fixed'
+PCA_Group <- 'Cancer'
+design =~ Run + Surgeon + Cancer
+contrast <- c('Cancer','Cancer','Control')
+meta <- metadata %>% dplyr::filter(!SampleID %in% c('P4','P310'))
 
 
 
+outPrefix <- 'TP_vs_Out'
+PCA_Group <- 'Out'
+design =~ Run + Surgeon + Out
+contrast <- c('Out','Good','Outlier')
+
+meta <- metadata %>% dplyr::filter(Group=='TP')
+
+meta$Out <- 'Good'
+
+meta <- mutate(meta, Out=ifelse(SampleID %in% c('P4','P310'), 'Outlier','Good'))
 
 doItAll()
 
 
-#timePoint <- c('0','120d','14d','30d','3d','3h','60d','6d','8h','9d','wo')
+meta#timePoint <- c('0','120d','14d','30d','3d','3h','60d','6d','8h','9d','wo')
 #for(idx1 in 1:10){
 #	for (idx2 in (idx1+1):11){
 #		G1 <- timePoint[idx1]
