@@ -75,7 +75,7 @@ meta <- metadata %>% dplyr::filter(Group=='ERPR' | Group=='Control')
 ```
 outPrefix <- 'HER'
 PCA_Group <- 'Group'
-design =~ Run + Surgeon + Group
+design =~ Run + Group
 contrast <- c('Group','HER','Control')
 meta <- metadata %>% dplyr::filter(Group=='HER' | Group=='Control')
 ```
